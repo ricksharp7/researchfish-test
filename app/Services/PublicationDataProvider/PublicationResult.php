@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\PublicationDataQuery;
+namespace App\Services\PublicationDataProvider;
 
 /**
  * A standard result object that is agnostic of the service used to populate it

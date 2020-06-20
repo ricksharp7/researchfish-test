@@ -4,7 +4,7 @@ namespace App\Services;
 
 use \Log;
 use App\Models\Publication;
-use App\Services\PublicationDataQuery\Contracts\DataProvider;
+use App\Services\PublicationDataProvider\Contracts\DataProvider;
 use Exception;
 
 class PublicationCacheService

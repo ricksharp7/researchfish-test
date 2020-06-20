@@ -10,8 +10,8 @@
 ✅ Create front-end page/component to retrieve records from cache
 ✅ Display whether the result was cached
 ✅ Update .env.example
-⬜ Add setup/Docker instructions to README
+✅ Add setup/Docker instructions to README
 ⬜ Support partial DOIs
 ✅ Add next-steps to README
 ⬜ Add design notes to README
-⬜ Push all to GitHub
+✅ Push all to GitHub

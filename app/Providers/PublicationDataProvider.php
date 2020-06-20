@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Services\PublicationDataQuery\Contracts\DataProvider;
-use App\Services\PublicationDataQuery\Providers\CrosRef;
+use App\Services\PublicationDataProvider\Contracts\DataProvider;
+use App\Services\PublicationDataProvider\Providers\CrosRef;
 use Illuminate\Support\ServiceProvider;
 
 class PublicationDataProvider extends ServiceProvider

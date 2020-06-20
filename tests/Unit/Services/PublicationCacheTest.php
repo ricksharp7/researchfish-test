@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Unit\Services\PublicationDataQuery;
+namespace Tests\Unit\Services\PublicationDataProvider;
 
 use \PublicationCache;
 use App\Models\Publication;
 use App\Services\PublicationCacheService;
-use App\Services\PublicationDataQuery\Contracts\DataProvider;
-use App\Services\PublicationDataQuery\Providers\CrosRef;
-use App\Services\PublicationDataQuery\PublicationResult;
+use App\Services\PublicationDataProvider\Contracts\DataProvider;
+use App\Services\PublicationDataProvider\Providers\CrosRef;
+use App\Services\PublicationDataProvider\PublicationResult;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Mockery;
 use Tests\TestCase;

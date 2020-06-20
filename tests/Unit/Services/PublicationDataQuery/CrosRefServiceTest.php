@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Unit\Services\PublicationDataQuery;
+namespace Tests\Unit\Services\PublicationDataProvider;
 
 use App\Exceptions\ProviderDocumentNotFoundException;
-use App\Services\PublicationDataQuery\Providers\CrosRef;
+use App\Services\PublicationDataProvider\Providers\CrosRef;
 use Tests\TestCase;
 
 class CrosRefServiceTest extends TestCase

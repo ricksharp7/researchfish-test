@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Services\PublicationDataQuery\PublicationResult;
+use App\Services\PublicationDataProvider\PublicationResult;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 

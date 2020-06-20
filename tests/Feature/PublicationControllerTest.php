@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Facades\PublicationCacheFacade;
-use App\Services\PublicationDataQuery\PublicationResult;
+use App\Services\PublicationDataProvider\PublicationResult;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

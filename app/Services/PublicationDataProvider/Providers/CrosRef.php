@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\PublicationDataQuery\Providers;
+namespace App\Services\PublicationDataProvider\Providers;
 
 use App\Exceptions\InvalidProviderConfigException;
 use App\Exceptions\ProviderDocumentNotFoundException;
 use App\Exceptions\ProviderRequestFailedException;
-use App\Services\PublicationDataQuery\Contracts\DataProvider as DataProviderInterface;
-use App\Services\PublicationDataQuery\PublicationResult;
+use App\Services\PublicationDataProvider\Contracts\DataProvider as DataProviderInterface;
+use App\Services\PublicationDataProvider\PublicationResult;
 use Exception;
 use Illuminate\Support\Facades\Http;
 use Log;
@@ -23,10 +23,10 @@ class CrosRef implements DataProviderInterface
     public function getDocument(string $doi): ?PublicationResult
     {
         try {
-            $url = $this->buildHeaders();
+            $url = $this->buildDocumentUri($doi);
             Log::info('Requesting document from CrosRef: ' . $url);
-            $response = Http::withHeaders($url)
-                ->get($this->buildDocumentUri($doi));
+            $response = Http::withHeaders($this->buildHeaders())
+                ->get($url);
         } catch (Exception $e) {
             Log::error($e->getMessage());
             throw new ProviderRequestFailedException($e->getMessage());
