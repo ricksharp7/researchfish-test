@@ -1954,6 +1954,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PublicationSearch',
   data: function data() {
@@ -37669,7 +37671,9 @@ var render = function() {
                             [_vm._v(_vm._s(publication.url))]
                           )
                         : _vm._e()
-                    ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(publication.retrieved_at))])
                   ])
                 }),
                 0
@@ -37693,7 +37697,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Publisher")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Url")])
+        _c("th", [_vm._v("Url")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Retrieved from Provider")])
       ])
     ])
   }

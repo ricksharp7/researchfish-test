@@ -23,7 +23,9 @@ class CrosRef implements DataProviderInterface
     public function getDocument(string $doi): ?PublicationResult
     {
         try {
-            $response = Http::withHeaders($this->buildHeaders())
+            $url = $this->buildHeaders();
+            Log::info('Requesting document from CrosRef: ' . $url);
+            $response = Http::withHeaders($url)
                 ->get($this->buildDocumentUri($doi));
         } catch (Exception $e) {
             Log::error($e->getMessage());
@@ -36,19 +38,23 @@ class CrosRef implements DataProviderInterface
             throw new ProviderRequestFailedException($response->body());
         }
         if ($response->clientError()) {
-            throw new ProviderDocumentNotFoundException();
+            Log::info('Document not found');
+            throw new ProviderDocumentNotFoundException('Document not found');
         }
         $data = $response->json();
         if (!isset($data["status"]) || $data["status"] !== "ok") {
+            Log::warning('Status returned was not OK');
             throw new ProviderRequestFailedException("Invalid response");
         }
 
         // If a single publication was returned, return it in a standardised format
         if ($data['message-type'] === 'work') {
+            Log::info('Document found');
             return $this->createPublicationResultFromMessage($data['message']);
         }
 
         // Fallback: return null
+        Log::warning('Reached fallback: ' . $response->getBody());
         return null;
     }
 

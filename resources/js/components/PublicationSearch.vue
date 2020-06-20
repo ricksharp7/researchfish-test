@@ -28,6 +28,7 @@
                             <th>Title</th>
                             <th>Publisher</th>
                             <th>Url</th>
+                            <th>Retrieved from Provider</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,7 @@
                             <td>{{ publication.title }}</td>
                             <td>{{ publication.publisher }}</td>
                             <td><a :href="publication.url" v-if="publication.url" target="_blank">{{ publication.url }}</a></td>
+                            <td>{{ publication.retrieved_at }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -19,6 +19,7 @@ class Publication extends JsonResource
             'title' => $this->title,
             'publisher' => $this->publisher,
             'url' => $this->url,
+            'retrieved_at' => $this->created_at->toDayDateTimeString(),
         ];
     }
 }

@@ -8,7 +8,7 @@
 ✅ Create service to retrieve records, first from DB, fallback to CrosRef
 ✅ Create API endpoint to retrieve records
 ✅ Create front-end page/component to retrieve records from cache
-⬜ Display whether the result was cached
+✅ Display whether the result was cached
 ✅ Update .env.example
 ⬜ Add setup/Docker instructions to README
 ⬜ Support partial DOIs

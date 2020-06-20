@@ -11,7 +11,7 @@
     <body>
         <div class="container-fluid" id="app">
             <div class="row">
-                <div class="col-8 offset-2">
+                <div class="col-10 offset-1">
                     <h1 class="mb-5 mt-3">Retrieve a Publication</h1>
                     <div class="card p-3">
                         <div>
