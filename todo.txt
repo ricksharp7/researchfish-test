@@ -1,0 +1,13 @@
+✅ Download and install Laravel
+⬜ Create git repo
+⬜ Basic Laravel Config
+⬜ Create README
+⬜ Configure Docker instance
+⬜ Create service for retrieving records from CrosRef
+⬜ Create DB table/migration/model for records
+⬜ Create service to retrieve records, first from DB, fallback to CrosRef
+⬜ Support partial DOIs
+⬜ Create API endpoint to retrieve records
+⬜ Create front-end page/component to retrieve records from cache
+⬜ Add setup/Docker instructions to README
+⬜ Push all to GitHub
