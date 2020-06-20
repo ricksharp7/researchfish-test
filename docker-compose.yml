@@ -1,0 +1,67 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: .docker/app.dockerfile
+    image: php:7.2.31-fpm
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+       - ./:/var/www
+    networks:
+      - app-network
+
+  #Nginx Service
+  webserver:
+    build:
+      context: .
+      dockerfile: .docker/web.dockerfile
+    container_name: web
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - .docker/vhost.conf:/etc/nginx/conf.d/app.conf
+    networks:
+      - app-network
+
+  #MySQL Service
+  database:
+    image: mysql:5.7.30
+    container_name: database
+    restart: unless-stopped
+    command: --disable-partition-engine-check
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: rocketfish
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: rocketfish
+      MYSQL_PASSWORD: breakfast_burrito
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+    
+#Volumes
+volumes:
+  dbdata:
+    driver: local
