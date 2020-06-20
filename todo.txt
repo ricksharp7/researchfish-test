@@ -3,13 +3,13 @@
 ✅ Basic Laravel Config
 ✅ Create README
 ✅ Configure Docker instance
-⬜ Create service for retrieving records from CrosRef
-⬜ Create DB table/migration/model for records
-⬜ Create service to retrieve records, first from DB, fallback to CrosRef
-⬜ Support partial DOIs
+✅ Create service for retrieving records from CrosRef
+✅ Create DB table/migration/model for records
+✅ Create service to retrieve records, first from DB, fallback to CrosRef
 ⬜ Create API endpoint to retrieve records
 ⬜ Create front-end page/component to retrieve records from cache
 ⬜ Update .env.example
 ⬜ Add setup/Docker instructions to README
+⬜ Support partial DOIs
 ⬜ Add next-steps to README
 ⬜ Push all to GitHub

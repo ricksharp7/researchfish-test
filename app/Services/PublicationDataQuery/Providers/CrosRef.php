@@ -6,7 +6,10 @@ use App\Exceptions\InvalidProviderConfigException;
 use App\Exceptions\ProviderDocumentNotFoundException;
 use App\Exceptions\ProviderRequestFailedException;
 use App\Services\PublicationDataQuery\Contracts\DataProvider as DataProviderInterface;
+use App\Services\PublicationDataQuery\PublicationResult;
+use Exception;
 use Illuminate\Support\Facades\Http;
+use Log;
 
 class CrosRef implements DataProviderInterface
 {
@@ -15,13 +18,21 @@ class CrosRef implements DataProviderInterface
      * Retrieves a single document from the provider
      *
      * @param string $doi
-     * @return array|null
+     * @return PublicationResult|null
      */
-    public function getDocument(string $doi): ?array
+    public function getDocument(string $doi): ?PublicationResult
     {
-        $response = Http::withHeaders($this->buildHeaders())
-            ->get($this->buildDocumentUri($doi));
+        try {
+            $response = Http::withHeaders($this->buildHeaders())
+                ->get($this->buildDocumentUri($doi));
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            throw new ProviderRequestFailedException($e->getMessage());
+        }
+
+        // Throw an exception if something goes wrong. Let the caller decide what to do with the exception.
         if ($response->serverError()) {
+            Log::error($response->body());
             throw new ProviderRequestFailedException($response->body());
         }
         if ($response->clientError()) {
@@ -31,10 +42,31 @@ class CrosRef implements DataProviderInterface
         if (!isset($data["status"]) || $data["status"] !== "ok") {
             throw new ProviderRequestFailedException("Invalid response");
         }
+
+        // If a single publication was returned, return it in a standardised format
         if ($data['message-type'] === 'work') {
-            return $data['message'];
+            return $this->createPublicationResultFromMessage($data['message']);
         }
+
+        // Fallback: return null
         return null;
+    }
+
+    /**
+     * Converts the response from CrosRef into a standardised response object
+     *
+     * @param array $data
+     * @return PublicationResult
+     */
+    public static function createPublicationResultFromMessage(array $data): PublicationResult
+    {
+        $publicationResult = new PublicationResult;
+        $publicationResult->doi = $data['DOI'] ?? null;
+        $publicationResult->title = isset($data['title']) ? implode(' ', $data['title']) : '';
+        $publicationResult->publisher = $data['publisher'] ?? null;
+        $publicationResult->url = $data['URL'] ?? null;
+        $publicationResult->meta = $data ?? null;
+        return $publicationResult;
     }
 
     /**
