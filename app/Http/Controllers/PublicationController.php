@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \Log;
 use App\Http\Resources\Publication as PublicationResource;
 use Exception;
 use Illuminate\Http\Request;
