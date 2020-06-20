@@ -45,9 +45,9 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: rocketfish
+      MYSQL_DATABASE: researchfish
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_USER: rocketfish
+      MYSQL_USER: researchfish
       MYSQL_PASSWORD: breakfast_burrito
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql

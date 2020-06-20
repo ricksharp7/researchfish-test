@@ -7,10 +7,11 @@
 ✅ Create DB table/migration/model for records
 ✅ Create service to retrieve records, first from DB, fallback to CrosRef
 ✅ Create API endpoint to retrieve records
-⬜ Create front-end page/component to retrieve records from cache
+✅ Create front-end page/component to retrieve records from cache
 ⬜ Display whether the result was cached
-⬜ Update .env.example
+✅ Update .env.example
 ⬜ Add setup/Docker instructions to README
 ⬜ Support partial DOIs
-⬜ Add next-steps to README
+✅ Add next-steps to README
+⬜ Add design notes to README
 ⬜ Push all to GitHub
