@@ -1,4 +1,4 @@
-# Rick Sharp Code Challenge Submission
+# ResearchFish Code Challenge Submission by Rick Sharp
 
 ## Setting up a local environment
 
@@ -9,7 +9,7 @@
 
 #### Installation steps
 
-1. Download this repository
+1. Clone this repository
 2. Install PHP dependencies: `composer install`
 3. Install NPM dependencies: `npm install && npm run dev`
 4. Copy the environment file `cp .env.example .env`
@@ -30,20 +30,20 @@ The database migration script will create a number of records with DOIs that sta
 #### Publication Data Provider Service
 
 The Publication Data Provider service is responsible for retrieving information from the external DOI provider. This
-service was designed in order to support easily changing providers in the future. A class contract is used to instantiate
-the provider class, and the Service provider fulfills requests for that contract with a concrete CrosRef provider class.
+service was designed in order to support easily changing providers in the future. A [class contract](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationDataProvider/Contracts/DataProvider.php) is used to instantiate
+the provider class, and the [Service Provider](https://github.com/ricksharp7/researchfish-test/blob/master/app/Providers/PublicationDataProvider.php) fulfills requests for that contract with a concrete [CrosRef provider class](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationDataProvider/Providers/CrosRef.php).
 In the future, additional concretions can be developed and substituted in the Service Provider.
 
-This service provider returns results in the form of a standard PublicationResult class. This standardised format allows
+This service returns results in the form of a standard [PublicationResult](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationDataProvider/PublicationResult.php) class. This standardised format allows
 other classes to expect a particular format regardless of which providers are used in the future.
 
 #### Publication Cache Service
 
-This service is responsible for retrieving the publication. It first checks the database to see if the publication has
+[This service](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationCacheService.php) is responsible for retrieving the publication. It first checks the database to see if the publication has
 previously been cached, and if so, returns that database record. If not, it then queries the external provider to attempt
 to retrieve the publication record. If successful, the record is cached in the database.
 
-This service uses a Laravel Facade in order to simplify mocking in unit tests, and in order to support calling the
+This service uses a [Facade](https://github.com/ricksharp7/researchfish-test/blob/master/app/Facades/PublicationCacheFacade.php) in order to simplify mocking in unit tests, and in order to support calling the
 primary method without needing to manually instantiate the class.
 
 ## Running tests

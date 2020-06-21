@@ -16,4 +16,4 @@
 ✅ Add next-steps to README
 ✅ Add design notes to README
 ✅ Push all to GitHub
-⬜ Test setup from scratch
+✅ Test setup from scratch
