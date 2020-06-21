@@ -9,6 +9,7 @@ use App\Services\PublicationDataProvider\Contracts\DataProvider;
 use App\Services\PublicationDataProvider\Providers\CrosRef;
 use App\Services\PublicationDataProvider\PublicationResult;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Collection;
 use Mockery;
 use Tests\TestCase;
 
@@ -26,7 +27,9 @@ class PublicationCacheTest extends TestCase
     {
         $document = factory(\App\Models\Publication::class)->create();
 
-        $publication = PublicationCache::getPublication($document->doi);
+        $publications = PublicationCache::getPublication($document->doi);
+        $this->assertInstanceOf(Collection::class, $publications);
+        $publication = $publications->first();
         $this->assertEquals($document->doi, $publication->doi);
         $this->assertEquals($document->title, $publication->title);
     }
@@ -40,7 +43,7 @@ class PublicationCacheTest extends TestCase
                 ->with('10.000/00000')
                 ->andReturn(null);
         }));
-        $publication = PublicationCache::getPublication('10.000/00000');
+        PublicationCache::getPublication('10.000/00000');
     }
 
     public function testItResultsFromAnExternalProviderAreStoredInTheDatabase()
@@ -59,7 +62,9 @@ class PublicationCacheTest extends TestCase
                 ->with('10.000/00000')
                 ->andReturn($publicationResult);
         }));
-        $publication = PublicationCache::getPublication('10.000/00000');
+        $publications = PublicationCache::getPublication('10.000/00000');
+
+        $this->assertInstanceOf(Collection::class, $publications);
 
         $this->assertDatabaseHas('publications', [
             'doi' => $publicationResult->doi,

@@ -23,7 +23,7 @@ class Publication extends Model
 
     public function scopeForDoi(Builder $query, string $doi): Builder
     {
-        return $query->where('doi', $doi);
+        return $query->where('doi', 'like', '%' . $doi . '%');
     }
 
     /**

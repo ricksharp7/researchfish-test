@@ -6,6 +6,7 @@ use \Log;
 use App\Models\Publication;
 use App\Services\PublicationDataProvider\Contracts\DataProvider;
 use Exception;
+use Illuminate\Support\Collection;
 
 class PublicationCacheService
 {
@@ -13,14 +14,14 @@ class PublicationCacheService
      * Retrieves a single publication by its DOI
      *
      * @param string $doi
-     * @return Publication|null
+     * @return Collection|null
      */
-    public function getPublication(string $doi): ?Publication
+    public function getPublication(string $doi): ?Collection
     {
         // First, attempt to retrieve it from the database
-        $publication = $this->getPublicationFromDatabase($doi);
-        if ($publication) {
-            return $publication;
+        $publications = $this->getPublicationsFromDatabase($doi);
+        if ($publications->count()) {
+            return $publications;
         }
 
         // If not found, attempt to retrieve it from the publication service
@@ -31,28 +32,28 @@ class PublicationCacheService
      * Retrieve the publication from the database
      *
      * @param string $doi
-     * @return Publication|null
+     * @return Collection|null
      */
-    private function getPublicationFromDatabase(string $doi): ?Publication
+    private function getPublicationsFromDatabase(string $doi): ?Collection
     {
-        return Publication::forDoi($doi)->first();
+        return Publication::forDoi($doi)->get();
     }
 
     /**
      * Retrieve the publication from an external service
      *
      * @param string $doi
-     * @return Publication|null
+     * @return Collection|null
      */
-    private function getPublicationFromExternalService(string $doi): ?Publication
+    private function getPublicationFromExternalService(string $doi): ?Collection
     {
         // Get the service by it's contract. Let the Service Provider decide which implementation to provide
         $provider = app()->make(DataProvider::class);
-        
+
         try {
             $publicationResult = $provider->getDocument($doi);
             if ($publicationResult) {
-                return Publication::createFromPublicationResult($publicationResult);
+                return collect([Publication::createFromPublicationResult($publicationResult)]);
             }
         } catch (Exception $e) {
             Log::warning($e->getMessage());

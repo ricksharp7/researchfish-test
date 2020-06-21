@@ -46,18 +46,20 @@ class PublicationControllerTest extends TestCase
         PublicationCacheFacade::shouldReceive('getPublication')
             ->once()
             ->with($publication->doi)
-            ->andReturn($publication);
+            ->andReturn(collect([$publication]));
 
         $response = $this->getJson('/api/publication?doi=' . $publication->doi);
 
         $response->assertStatus(200)
             ->assertJson([
                 'status' => 'success',
-                'publication' => [
-                    'doi' => $publication->doi,
-                    'title' => $publication->title,
-                    'publisher' => $publication->publisher,
-                    'url' => $publication->url,
+                'publications' => [
+                    [
+                        'doi' => $publication->doi,
+                        'title' => $publication->title,
+                        'publisher' => $publication->publisher,
+                        'url' => $publication->url,
+                    ]
                 ]
             ]);
     }

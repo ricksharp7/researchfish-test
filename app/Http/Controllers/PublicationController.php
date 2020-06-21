@@ -19,19 +19,19 @@ class PublicationController extends Controller
         $doi = $request->input('doi');
 
         try {
-            $result = PublicationCache::getPublication($doi);
-            if (!$result) {
+            $publications = PublicationCache::getPublication($doi);
+
+            if (!$publications) {
                 return response()->json([
                     'status' => 'failure',
                     'message' => 'Not found',
                 ], 404);
             }
-            if ($result) {
-                return response()->json([
-                    'status' => 'success',
-                    'publication' => new PublicationResource($result),
-                ]);
-            }
+
+            return response()->json([
+                'status' => 'success',
+                'publications' => PublicationResource::collection($publications),
+            ]);
         } catch (Exception $e) {
             Log::error($e->getMessage());
             return response()->json([

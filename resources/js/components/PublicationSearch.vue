@@ -92,7 +92,7 @@ export default {
                 this.submitting = false;
                 this.clearMessages();
                 if (data.status === 'success') {
-                    this.publications.push(data.publication);
+                    this.publications = data.publications;
                 } else {
                     this.errorMessage = data.message ? data.message : 'An error ocurred while processing your request';
                 }

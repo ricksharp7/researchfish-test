@@ -3,10 +3,12 @@
 ## Setting up a local environment
 
 #### Requirements
-- [Composer](https://getcomposer.org/download/)
-- [Docker](https://docs.docker.com/get-docker/)
+
+-   [Composer](https://getcomposer.org/download/)
+-   [Docker](https://docs.docker.com/get-docker/)
 
 #### Installation steps
+
 1. Download this repository
 2. Install PHP dependencies: `composer install`
 3. Install NPM dependencies: `npm install && npm run dev`
@@ -50,7 +52,9 @@ Tests are run against an in-memory SQLite database, which speeds up the tests, a
 
 ## Future enhancements
 
-* Remove environment variable values from .env.example. I just left them in there for now to simplify setup.
-* Handle any other edge cases returned from CrosRef.
-* Provide freetext search functionality.
-* Make the interface actually look nice.
+- Remove environment variable values from .env.example. I just left them in there for now to simplify setup.
+- Handle any other edge cases returned from CrosRef.
+- Add validation for the DOI format.
+- Support results pagination.
+- Provide freetext search functionality.
+- Make the interface actually look nice.

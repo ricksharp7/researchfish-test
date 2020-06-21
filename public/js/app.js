@@ -2007,7 +2007,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.clearMessages();
 
         if (data.status === 'success') {
-          _this.publications.push(data.publication);
+          _this.publications = data.publications;
         } else {
           _this.errorMessage = data.message ? data.message : 'An error ocurred while processing your request';
         }
