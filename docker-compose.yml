@@ -48,7 +48,7 @@ services:
       MYSQL_DATABASE: researchfish
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_USER: researchfish
-      MYSQL_PASSWORD: breakfast_burrito
+      MYSQL_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:

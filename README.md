@@ -10,12 +10,27 @@
 #### Installation steps
 
 1. Clone this repository
-2. Install PHP dependencies: `composer install`
-3. Install NPM dependencies: `npm install && npm run dev`
-4. Copy the environment file `cp .env.example .env`
-5. Generate the Laravel Application key: `php artisan key:generate`
-6. Build and start the Docker environment: `docker-compose up`
-7. Create the database: `docker-compose run app php artisan migrate --seed`
+2. `cd` to the directory
+3. Run the following commands
+```
+# Install PHP dependencies
+composer install
+
+# Install NPM dependencies
+npm install && npm run dev
+
+# Copy the environment file
+cp .env.example .env
+
+# Generate the Laravel Application key
+php artisan key:generate
+
+# Build and start the Docker environment
+docker-compose up -d
+
+# Create the database
+docker-compose run app php artisan migrate --seed
+```
 
 You should now be able to access the site via http://localhost:8080/
 
