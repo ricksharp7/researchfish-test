@@ -11,9 +11,8 @@
 ✅ Display whether the result was cached
 ✅ Update .env.example
 ✅ Add setup/Docker instructions to README
-⬜ Support partial DOIs
-- Support prefix search
-- Add to README
+✅ Support partial DOIs
+✅ Create a test data seeder
 ✅ Add next-steps to README
 ✅ Add design notes to README
 ✅ Push all to GitHub

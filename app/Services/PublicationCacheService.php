@@ -19,12 +19,15 @@ class PublicationCacheService
     public function getPublication(string $doi): ?Collection
     {
         // First, attempt to retrieve it from the database
+        Log::info('Retreiving from database: ' . $doi);
         $publications = $this->getPublicationsFromDatabase($doi);
         if ($publications->count()) {
+            Log::info('Found ' . $publications->count() . ' records');
             return $publications;
         }
 
         // If not found, attempt to retrieve it from the publication service
+        Log::info('Retreiving from external service');
         return $this->getPublicationFromExternalService($doi);
     }
 

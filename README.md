@@ -15,9 +15,15 @@
 4. Copy the environment file `cp .env.example .env`
 5. Generate the Laravel Application key: `php artisan key:generate`
 6. Build and start the Docker environment: `docker-compose up`
-7. Create the database: `docker-compose run app php artisan migrate`
+7. Create the database: `docker-compose run app php artisan migrate --seed`
 
 You should now be able to access the site via http://localhost:8080/
+
+## Partial searches
+
+The project spec called for support of partial DOIs. However, the CrosRef documentation does not list any support for partial DOI searching. For this project, I implemented a wildcard search in the database, with wildcards placed at the beginning and end of the search term. So a search for "a0030" will match the document with the DOI of "10.1037/a0030689" in the database. 
+
+The database migration script will create a number of records with DOIs that start with "10.1037/".
 
 ## Architecture notes
 
@@ -53,8 +59,9 @@ Tests are run against an in-memory SQLite database, which speeds up the tests, a
 ## Future enhancements
 
 - Remove environment variable values from .env.example. I just left them in there for now to simplify setup.
+- Support publisher (prefix) searches with CrosRef
 - Handle any other edge cases returned from CrosRef.
 - Add validation for the DOI format.
 - Support results pagination.
-- Provide freetext search functionality.
+- Support free text search functionality.
 - Make the interface actually look nice.
