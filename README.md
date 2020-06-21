@@ -1,5 +1,7 @@
 # ResearchFish Code Challenge Submission by Rick Sharp
 
+This is a coding challenge submission by Rick Sharp for [ResearchFish](https://researchfish.com/).
+
 ## Setting up a local environment
 
 #### Requirements
@@ -45,22 +47,15 @@ The database migration script will create a number of records with DOIs that sta
 
 #### Publication Data Provider Service
 
-The Publication Data Provider service is responsible for retrieving information from the external DOI provider. This
-service was designed in order to support easily changing providers in the future. A [class contract](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationDataProvider/Contracts/DataProvider.php) is used to instantiate
-the provider class, and the [Service Provider](https://github.com/ricksharp7/researchfish-test/blob/master/app/Providers/PublicationDataProvider.php) fulfills requests for that contract with a concrete [CrosRef provider class](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationDataProvider/Providers/CrosRef.php).
-In the future, additional concretions can be developed and substituted in the Service Provider.
+The Publication Data Provider service is responsible for retrieving information from the external DOI provider. This service was designed in order to support easily changing providers in the future. A [class contract](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationDataProvider/Contracts/DataProvider.php) is used to instantiate the provider class, and the [Service Provider](https://github.com/ricksharp7/researchfish-test/blob/master/app/Providers/PublicationDataProvider.php) fulfills requests for that contract with a concrete [CrosRef provider class](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationDataProvider/Providers/CrosRef.php). In the future, additional concretions can be developed and substituted in the Service Provider.
 
-This service returns results in the form of a standard [PublicationResult](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationDataProvider/PublicationResult.php) class. This standardised format allows
-other classes to expect a particular format regardless of which providers are used in the future.
+This service returns results in the form of a standard [PublicationResult](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationDataProvider/PublicationResult.php) class. This standardised format allows other classes to expect a particular format regardless of which providers are used in the future.
 
 #### Publication Cache Service
 
-[This service](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationCacheService.php) is responsible for retrieving the publication. It first checks the database to see if the publication has
-previously been cached, and if so, returns that database record. If not, it then queries the external provider to attempt
-to retrieve the publication record. If successful, the record is cached in the database.
+[This service](https://github.com/ricksharp7/researchfish-test/blob/master/app/Services/PublicationCacheService.php) is responsible for retrieving the publication. It first checks the database to see if the publication has previously been cached, and if so, returns that database record. If not, it then queries the external provider to attempt to retrieve the publication record. If successful, the record is cached in the database.
 
-This service uses a [Facade](https://github.com/ricksharp7/researchfish-test/blob/master/app/Facades/PublicationCacheFacade.php) in order to simplify mocking in unit tests, and in order to support calling the
-primary method without needing to manually instantiate the class.
+This service uses a [Facade](https://github.com/ricksharp7/researchfish-test/blob/master/app/Facades/PublicationCacheFacade.php) in order to simplify support calling the primary method without needing to manually instantiate the class.
 
 ## Running tests
 
@@ -81,3 +76,4 @@ Tests are run against an in-memory SQLite database, which speeds up the tests, a
 - Support results pagination.
 - Support free text search functionality.
 - Make the interface actually look nice.
+- Write some proper front-end tests.
