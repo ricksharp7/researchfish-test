@@ -30,6 +30,7 @@ docker-compose up -d
 
 # Create the database
 docker-compose run app php artisan migrate --seed
+# (Note if you get an error, re-run this command)
 ```
 
 You should now be able to access the site via http://localhost:8080/
